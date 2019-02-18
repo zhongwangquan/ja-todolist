@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://g.alicdn.com/msui/sm/0.6.2/css/sm.min.css">
+    <link rel="stylesheet" href="./css/layout.min.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="page-group" >
+        <div class="page page-current">
+            <!-- header-- start -->
+            <header class="bar bar-nav">
+                <a class="icon icon-star pull-left"></a>
+                <a class="icon icon-check pull-right"
+                    @click=" input"></a>
+                <h1 class="title">标题</h1>
+            </header>
+            <!-- header-- end -->
+
+            <!-- main -- start -->
+            <div class="content">
+                <!-- card -- start -->
+                <div class="card" 
+                v-for=" (todo,index) in switchTab " 
+                :key=" todo.id ">
+                    <div class="card-content">
+                        <div class="card-content-inner" v-cloak>
+                            {{ todo.content }}
+                        </div>
+                        <p>
+                            <a href="#" class="button button-success" 
+                                :class='{"button-fill" : todo.f}' 
+                                @click=" changeStates(index) "
+                            >
+                                <i class="icon icon-check"></i>
+                            </a>
+                            <a href="#" class="button button-danger button-fill" 
+                                    @click=" del(index) ">
+                                <i class="icon icon-remove"></i>
+                            </a>
+
+                        </p>
+                    </div>
+                </div>
+            
+      
+                <!-- card -- end -->
+
+                <!-- footer -- start -->
+                <ul class="footer" >
+                    <li v-for = "(footer,index) in footers"
+                        :key=" footer.id "
+                        @click ="type = footer.content"
+                        >
+                        
+                    {{ footer.content }}</li>
+                    <!-- {{switchTab}} -->
+                
+                </ul>
+                <!-- footer -- end -->
+
+            </div>
+
+            <!-- del -- start -->
+            <div  v-show="delFlag" class="modal-del" >
+                    <div class= "modal-bg"
+                        @click = "cancelDel"
+                    ></div>
+                    <div class="card-content modal-box">
+                        <div class="card-content-inner " >
+                            你确定删除内容吗？
+                        </div>
+                        <p>
+                            
+                            <a href="#" class="button button-success  button-fill" 
+                                @click=" confirmDel() ">
+                                确定
+                            </a>
+                            <a href="#" class="button button-danger  button-fill" 
+                                @click=" cancelDel() ">
+                                取消
+                            </a>
+
+                        </p>
+                    </div>
+
+            </div>
+            <!-- del  -- end -->
+
+            <!-- input -- start -->
+            <div  v-show="inputFlag" class="modal-del modal-input" >
+                    <div class= "modal-bg"
+                        @click = "cancelInput"
+                    ></div>
+                    <div class="card-content modal-box">
+                        <div class="card-content-inner " >
+                          输入添加内容吗？
+                          <input type="text" v-model="inputValue">
+                        </div>
+                        <p>
+                            
+                            <a href="#" class="button button-success  button-fill" 
+                                @click=" confirmInput() ">
+                                确定
+                            </a>
+                            <a href="#" class="button button-danger  button-fill" 
+                                @click=" cancelInput() ">
+                                取消
+                            </a>
+
+                        </p>
+                    </div>
+
+            </div>
+            <!-- input  -- end -->
+            <!-- main -- end -->
+
+        </div>
+
+
+    </div>
+
+</div>
+</body>
+
+<script src="js/vue.js"></script>
+<script src="js/index.js"></script>
+
+
+
+</html>
